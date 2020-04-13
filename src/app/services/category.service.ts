@@ -17,7 +17,7 @@ export class CategoryService {
     return this.http.get(this.apiPath).pipe(
       catchError(this.handleError),
       map(this.jsonDataToCategories)
-    )
+    );
   }
 
   getById(id: number): Observable<Category> {
