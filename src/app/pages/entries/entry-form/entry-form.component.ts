@@ -57,7 +57,7 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     this.setCurrentAction();
     this.buildEntryForm();
     this.loadEntry();
-    this.loadCategories()
+    this.loadCategories();
   }
   loadCategories() {
     this.categoryService.getAll().subscribe(
