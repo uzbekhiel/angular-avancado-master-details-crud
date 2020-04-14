@@ -1,13 +1,12 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import toastr from 'toastr';
 import { Entry } from 'src/app/models/entry.model';
-import { EntryService } from 'src/app/services/entry.service';
-import { JsonPipe } from '@angular/common';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { EntryService } from 'src/app/services/entry.service';
 
 @Component({
   selector: 'app-entry-form',

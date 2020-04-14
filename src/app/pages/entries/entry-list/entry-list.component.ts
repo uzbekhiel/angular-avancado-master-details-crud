@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Entry } from 'src/app/models/entry.model';
 import { EntryService } from 'src/app/services/entry.service';
 
+
 @Component({
   selector: 'app-entry-list',
   templateUrl: './entry-list.component.html',
