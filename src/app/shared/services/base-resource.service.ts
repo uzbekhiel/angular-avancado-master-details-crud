@@ -8,8 +8,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 
     protected http: HttpClient;
 
-    // tslint:disable-next-line: ban-types
-    constructor(protected apiPath: string, protected injector: Injector, protected jsonDataToResourceFn: Function) {
+    constructor(protected apiPath: string, protected injector: Injector, protected jsonDataToResourceFn: any) {
         this.http = injector.get(HttpClient);
     }
 
