@@ -52,12 +52,12 @@ export class EntryService {
     }
 
     private jsonDataToEntry(jsonObject: any): Entry {
-        return jsonObject as Entry;
+        return Object.assign(new Entry(), jsonObject);
     }
 
     private jsonDataToEntries(jsonObject: any[]): Entry[] {
         const entries: Entry[] = [];
-        jsonObject.forEach(e => { entries.push(e as Entry); });
+        jsonObject.forEach(e => { entries.push(Object.assign(new Entry(), e)); });
         return entries;
     }
 
