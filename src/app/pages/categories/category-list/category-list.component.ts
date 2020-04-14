@@ -29,7 +29,4 @@ export class CategoryListComponent implements OnInit {
       );
     }
   }
-
-
-
 }
