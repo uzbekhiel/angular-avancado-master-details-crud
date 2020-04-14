@@ -6,6 +6,8 @@ import toastr from 'toastr';
 import { Entry } from 'src/app/models/entry.model';
 import { EntryService } from 'src/app/services/entry.service';
 import { JsonPipe } from '@angular/common';
+import { Category } from 'src/app/models/category.model';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-entry-form',
@@ -20,9 +22,32 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
   serverErrorMessages: string[];
   submittingForm = false;
   entry: Entry = new Entry();
+  categories: Category[] = [];
+
+  imaskConfig = {
+    mask: Number,
+    scale: 2,
+    thousandsSeparator: '',
+    padFractionalZeros: true,
+    normalizeZeros: true,
+    radix: ','
+  };
+
+  pt = {
+    firstDayOfWeek: 0,
+    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+    dayNamesMin: ['Do', 'Se', 'Te', 'Qu', 'Qu', 'Se', 'Sa'],
+    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+      'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    today: 'Hoje',
+    clear: 'Limpar'
+  };
 
   constructor(
     private entryService: EntryService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder
@@ -32,6 +57,13 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
     this.setCurrentAction();
     this.buildEntryForm();
     this.loadEntry();
+    this.loadCategories()
+  }
+  loadCategories() {
+    this.categoryService.getAll().subscribe(
+      (categories) => this.categories = categories,
+      (error) => alert('Erro ao carregar a lista')
+    );
   }
   private loadEntry() {
     if (this.currentAction === 'edit') {
@@ -54,11 +86,11 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
       id: [null],
       name: [null, [Validators.required, Validators.minLength(2)]],
       description: [null],
-      type: [null, [Validators.required]],
+      type: ['expense', [Validators.required]],
       amount: [null, [Validators.required]],
       date: [null, [Validators.required]],
-      paid: [null, [Validators.required]],
-      category: [null, [Validators.required]]
+      paid: [true, [Validators.required]],
+      categoryId: [null, [Validators.required]]
     });
   }
   private setCurrentAction() {
@@ -82,6 +114,14 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
       this.updateEntry();
     }
   }
+  get typeOptions(): Array<any> {
+    return Object.entries(Entry.types).map(
+      ([value, text]) => {
+        return { text, value };
+      }
+    )
+  }
+
   private updateEntry() {
     const entry = Object.assign(new Entry(), this.entryForm.value);
     this.entryService.update(entry).subscribe(

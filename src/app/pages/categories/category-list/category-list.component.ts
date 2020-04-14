@@ -18,7 +18,6 @@ export class CategoryListComponent implements OnInit {
       (categories) => this.categories = categories,
       (error) => alert('Erro ao carregar a lista')
     );
-    console.log(this.categories);
   }
 
   deleteCategory(category: Category) {
