@@ -8,7 +8,10 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
 
     protected http: HttpClient;
 
-    constructor(protected apiPath: string, protected injector: Injector, protected jsonDataToResourceFn: any) {
+    constructor(
+        protected apiPath: string,
+        protected injector: Injector,
+        protected jsonDataToResourceFn: (jsonData) => T) {
         this.http = injector.get(HttpClient);
     }
 
