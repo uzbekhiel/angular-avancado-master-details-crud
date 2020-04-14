@@ -151,6 +151,4 @@ export class EntryFormComponent implements OnInit, AfterContentChecked {
       () => this.router.navigate(['entries', entry.id, 'edit'])
     );
   }
-
-
 }
