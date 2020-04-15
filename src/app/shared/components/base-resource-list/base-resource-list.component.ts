@@ -6,7 +6,7 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
 
     public resources: T[] = [];
 
-    constructor(private resourceService: BaseResourceService<T>) { }
+    constructor(protected resourceService: BaseResourceService<T>, protected confirmText: string) { }
 
     ngOnInit() {
         this.resourceService.getAll().subscribe(
@@ -15,8 +15,8 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
         );
     }
 
-    deleteCategory(resource: T) {
-        const mustDelete = confirm('Deseja realmente exlcuir essa categoria');
+    protected deleteResource(resource: T) {
+        const mustDelete = confirm(this.confirmText);
         if (mustDelete) {
             this.resourceService.delete(resource.id).subscribe(
                 () => this.resources = this.resources.filter(e => e !== resource),
