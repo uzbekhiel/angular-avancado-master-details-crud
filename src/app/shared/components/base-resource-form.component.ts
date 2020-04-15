@@ -2,9 +2,9 @@ import { OnInit, AfterContentChecked, Injector } from '@angular/core';
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import toastr from 'toastr';
 import { BaseResourceService } from '../services/base-resource.service';
 import { BaseResourceModel } from '../models/base-resource.model';
+import toastr from 'toastr';
 
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
 
@@ -72,10 +72,10 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
     protected setPageTitle() {
         // const resourceName = this.resource.name || '';
-        this.pageTitle = this.route.snapshot.url[0].path === 'new' ? this.creationPageTitle() : this.updateTitle();
+        this.pageTitle = this.route.snapshot.url[0].path === 'new' ? this.creationPageTitle() : this.updatePageTitle();
     }
 
-    protected updateTitle(): string {
+    protected updatePageTitle(): string {
         return 'Edição';
     }
 
