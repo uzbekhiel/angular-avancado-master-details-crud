@@ -2,8 +2,8 @@ import { OnInit, AfterContentChecked, Injector } from '@angular/core';
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { BaseResourceService } from '../services/base-resource.service';
-import { BaseResourceModel } from '../models/base-resource.model';
+import { BaseResourceService } from '../../services/base-resource.service';
+import { BaseResourceModel } from '../../models/base-resource.model';
 import toastr from 'toastr';
 
 export abstract class BaseResourceFormComponent<T extends BaseResourceModel> implements OnInit, AfterContentChecked {
@@ -105,7 +105,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
         if (error.status === 422) {
             this.serverErrorMessages = JSON.parse(error._body);
         } else {
-            this.serverErrorMessages = ['Falha na comunicação com o servidor. Por favor tente mais tarde.']
+            this.serverErrorMessages = ['Falha na comunicação com o servidor. Por favor tente mais tarde.'];
         }
     }
 
