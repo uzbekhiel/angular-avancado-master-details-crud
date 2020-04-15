@@ -102,6 +102,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     protected actionsForError(error: any): void {
         toastr.error('Ocorreu um erro ao processar sua solicitação');
         this.submittingForm = false;
+        console.log(error);
         if (error.status === 422) {
             this.serverErrorMessages = JSON.parse(error._body);
         } else {
