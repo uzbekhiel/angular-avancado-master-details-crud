@@ -19,8 +19,6 @@ export class CategoryFormComponent extends BaseResourceFormComponent<Category> {
     super(injector, categoryService, new Category(), Category.fromJson);
   }
 
-  category: Category = new Category();
-
   protected creationPageTitle(): string {
     return 'Cadastro de nova categoria';
   }
