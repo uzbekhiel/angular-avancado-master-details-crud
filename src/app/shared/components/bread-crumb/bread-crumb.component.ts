@@ -5,7 +5,6 @@ interface BreadCrumbItem {
   link?: string;
 }
 
-
 @Component({
   selector: 'app-bread-crumb',
   templateUrl: './bread-crumb.component.html',
